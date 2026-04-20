@@ -64,7 +64,8 @@ func main() {
 			return
 		}
 		defer f.Close()
-		_, _ = f.WriteString("IP,ORIGIN,CERT_DOMAIN,CERT_ISSUER,GEO_CODE\n")
+		// Added SCAN_TIME column to track when each result was recorded
+		_, _ = f.WriteString("IP,ORIGIN,CERT_DOMAIN,CERT_ISSUER,GEO_CODE,SCAN_TIME\n")
 		outWriter = f
 	}
 	var hostChan <-chan Host
@@ -100,8 +101,4 @@ func main() {
 		slog.Info("Parsed domains", "count", len(domains))
 		hostChan = Iterate(strings.NewReader(strings.Join(domains, "\n")))
 	}
-	outCh := OutWriter(outWriter)
-	defer close(outCh)
-	geo := NewGeo()
-	var wg sync.WaitGroup
-	wg.Add(
+	
