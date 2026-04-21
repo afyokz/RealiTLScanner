@@ -60,12 +60,7 @@ To enable Geo IP information, place a MaxMind GeoLite2/GeoIP2 Country Database i
 
 ## Demo
 
-Example stdout:
-
-```bash
-2024/20:51:10.017+08:00
-2024/103.9 tls=1.3 alpn=h2 domain=rocky-linux.tk issuer="Let's Encrypt"
-2024/02/08 20:51:10 INFO Connected to target feasible=true host=107.172.103.11 tls=1.3 alpn=h2 domain=rn.allinai.dev issuer="Let's Encrypt"
+.3 alpn=h2 Connected to target feasible=true host=107.172.103.11 tls=1.3 alpn=h2 domain=rn.allinai.dev issuer="Let's Encrypt"
 2024/02/08 20:51:13 INFO Connected to target feasible=true host=107.172.103.16 tls=1.3 alpn=h2 domain=san.hiddify01.foshou.vip issuer="Let's Encrypt"
 2024/02/08 20:51:13 INFO Connected to target feasible=true host=107.172.103.19 tls=1.3 alpn=h2 domain=mgzx19.cnscholar.top issuer="Let's Encrypt"
 2024/02/08 20:51:13 INFO Connected to target feasible=true host=107.172.103.22 tls=1.3 alpn=h2 domain=hy2.znull.top issuer=ZeroSSL
@@ -79,5 +74,10 @@ Example output file:
 ```csv
 IP,ORIGIN,CERT_DOMAIN,CERT_ISSUER,GEO_CODE
 202.70.64.2,ntc.net.np,*.ntc.net.np,"GlobalSign nv-sa",NP
-196.200.160.70,mirror.marwan.ma
+196.200.160.
 ```
+
+## Personal Notes
+
+- I typically run scans with `-thread 20 -timeout 5` for a good balance of speed and reliability.
+- Remember to place `Country.mmdb` in the working directory before scanning to get geo info in results.
