@@ -16,9 +16,13 @@ func NewGeo() *Geo {
 	geo := &Geo{
 		mu: sync.Mutex{},
 	}
-	reader, err := geoip2.Open("Country.mmdb")
+	// Try GeoLite2-Country.mmdb first, fall back to Country.mmdb
+	reader, err := geoip2.Open("GeoLite2-Country.mmdb")
 	if err != nil {
-		slog.Warn("Cannot open Country.mmdb")
+		reader, err = geoip2.Open("Country.mmdb")
+	}
+	if err != nil {
+		slog.Warn("Cannot open GeoIP database (tried GeoLite2-Country.mmdb and Country.mmdb)")
 		return geo
 	}
 	slog.Info("Enabled GeoIP")
